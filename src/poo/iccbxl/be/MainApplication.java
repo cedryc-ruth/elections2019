@@ -1,6 +1,9 @@
 package poo.iccbxl.be;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class MainApplication {
 
@@ -31,6 +34,26 @@ public class MainApplication {
 		
 		
 		//Affichage du résultat
+	String nom;
+	int nbSieges = 0;
+	
+	Set<String> keys = listes.keySet();
+	
+	Iterator it = keys.iterator();
+	
+	while(it.hasNext()) {
+		nom = (String) it.next();
+		nbSieges = listes.get(nom)[1];
+	
+		System.out.println("La liste "
+				+nom
+				+" a obtenu "
+				+nbSieges+" "
+				+((nbSieges>1)?"sièges":"siège")
+				+"."
+		);
+	}
+	
 		
 		
 
