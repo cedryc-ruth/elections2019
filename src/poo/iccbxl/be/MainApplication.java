@@ -1,7 +1,12 @@
 package poo.iccbxl.be;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -21,9 +26,9 @@ public class MainApplication {
 	
 	TreeMap<String,int[]> listes = new TreeMap<String, int[]>();
 	
-	listes.put("A", dataListeA);
+	listes.put("Z", dataListeA);
 	listes.put("B", dataListeB);
-	listes.put("C", dataListeC);
+	listes.put("J", dataListeC);
 	listes.put("D", dataListeD);
 	listes.put("E", dataListeE);
 	listes.put("F", dataListeF);
@@ -117,6 +122,25 @@ public class MainApplication {
 		moyenneMax = 0d;
 		listeCandidat = null;
 	}
+	
+	//Tri des listes sur base du nombre de sièges obtenus
+	ArrayList<Map.Entry<String, int[]>> listesTriees = new ArrayList<Map.Entry<String, int[]>>();
+	
+	listesTriees.addAll(listes.entrySet());
+	listesTriees.sort(new Comparator<Map.Entry<String, int[]>>() {
+
+		public int compare(Entry<String, int[]> e1, Entry<String, int[]> e2) {
+			if(e1.getValue()[1]>e2.getValue()[1]) {
+				return -1;
+			}
+			
+			if(e1.getValue()[1]<e2.getValue()[1]) {
+				return 1;
+			}
+			
+			return 0;
+		}
+	});
 	
 		//Affichage du résultat
 	int nbSieges = 0;
