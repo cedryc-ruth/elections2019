@@ -14,7 +14,7 @@ public class MainApplication {
 	int[] dataListeA = { 32000, 0, 0 };
 	int[] dataListeB = { 25000, 0, 0 };
 	int[] dataListeC = { 16000, 0, 0 };
-	int[] dataListeD = { 12500, 0, 0 };
+	int[] dataListeD = { 12000, 0, 0 };
 	int[] dataListeE = { 8000, 0, 0 };
 	int[] dataListeF = { 4500, 0, 0 };
 	int[] dataListeG = { 2500, 0, 0 };
@@ -33,21 +33,41 @@ public class MainApplication {
 		//Traitement des données (Méthode de calcul)
 		
 	//Mocking du traitement
-	dataListeA[1] = 2;	//Attribution des dièges
+/*	dataListeA[1] = 2;	//Attribution des dièges
 	dataListeB[1] = 2;
 	dataListeC[1] = 1;
 	dataListeD[1] = 1;
 	dataListeE[1] = 0;
 	dataListeF[2] = 1;	//Liste éliminée
 	dataListeG[2] = 1;	//Liste éliminée
-		
-		//Affichage du résultat
-	String nom;
-	int nbSieges = 0;
+*/
+	//Calcul du suffrage total
+	int suffrageTotal = 0;
 	
+	//Élimination des listes moins populaires (Barre des 5%)
 	Set<String> keys = listes.keySet();
 	
 	Iterator it = keys.iterator();
+	String nom;
+	int nbVoix = 0;
+	
+	while(it.hasNext()) {
+		nom = (String) it.next();
+		nbVoix = listes.get(nom)[0];
+		suffrageTotal += nbVoix;
+	}
+	
+	it = keys.iterator();
+	
+	while(it.hasNext()) {
+		nom = (String) it.next();
+		if(listes.get(nom)[0]/(double)suffrageTotal<0.05) {
+			listes.get(nom)[2] = 1;		//Liste éliminée
+		}
+	}
+		//Affichage du résultat
+	int nbSieges = 0;
+	
 	
 	while(it.hasNext()) {
 		nom = (String) it.next();
