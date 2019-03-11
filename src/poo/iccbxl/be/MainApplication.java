@@ -32,6 +32,14 @@ public class MainApplication {
 
 		//Traitement des données (Méthode de calcul)
 		
+	//Mocking du traitement
+	dataListeA[1] = 2;	//Attribution des dièges
+	dataListeB[1] = 2;
+	dataListeC[1] = 1;
+	dataListeD[1] = 1;
+	dataListeE[1] = 0;
+	dataListeF[2] = 1;	//Liste éliminée
+	dataListeG[2] = 1;	//Liste éliminée
 		
 		//Affichage du résultat
 	String nom;
