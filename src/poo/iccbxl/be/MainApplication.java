@@ -57,7 +57,8 @@ public class MainApplication {
 	}
 	
 	int suffrageEffectif = suffrageTotal;
-	
+	TreeMap<String,int[]> listesEffectives = new TreeMap<String, int[]>();
+
 	it = keys.iterator();
 	
 	while(it.hasNext()) {
@@ -65,11 +66,23 @@ public class MainApplication {
 		if(listes.get(nom)[0]/(double)suffrageTotal<0.05) {
 			listes.get(nom)[2] = 1;					//Liste éliminée
 			suffrageEffectif -= listes.get(nom)[0];	//Retrait des voix
+		} else {
+			listesEffectives.put(nom, listes.get(nom));
 		}
 	}
 	
+	
 	//Calcul du quotient électoral
-	double quotientElectoral = suffrageEffectif/(double)nbSiegesAPourvoir;
+	int quotientElectoral = (int) Math.floor(suffrageEffectif/(double)nbSiegesAPourvoir);
+	
+	//Attribution des sièges sur base du quotient électoral
+	Set<String> realKeys = listesEffectives.keySet();
+	it = realKeys.iterator();
+	
+	while(it.hasNext()) {
+		nom = (String) it.next();
+		listesEffectives.get(nom)[1] = listesEffectives.get(nom)[0]/quotientElectoral;	
+	}
 	
 		//Affichage du résultat
 	int nbSieges = 0;
