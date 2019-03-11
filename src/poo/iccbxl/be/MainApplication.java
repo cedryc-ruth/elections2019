@@ -74,6 +74,8 @@ public class MainApplication {
 	
 	//Calcul du quotient électoral
 	int quotientElectoral = (int) Math.floor(suffrageEffectif/(double)nbSiegesAPourvoir);
+	int nbSiegesObtenus = 0;
+	int nbSiegesRestant = nbSiegesAPourvoir;
 	
 	//Attribution des sièges sur base du quotient électoral
 	Set<String> realKeys = listesEffectives.keySet();
@@ -81,7 +83,39 @@ public class MainApplication {
 	
 	while(it.hasNext()) {
 		nom = (String) it.next();
-		listesEffectives.get(nom)[1] = listesEffectives.get(nom)[0]/quotientElectoral;	
+		nbSiegesObtenus = listesEffectives.get(nom)[0]/quotientElectoral;
+		listesEffectives.get(nom)[1] = nbSiegesObtenus;
+		nbSiegesRestant -= nbSiegesObtenus;
+	}
+	
+	//Répartition des restes
+	int nbVoixListe = 0;
+	int nbSiegesListe = 0;
+	double moyenne = 0d;
+	double moyenneMax = 0d;
+	String listeCandidat = null;
+	
+	while(nbSiegesRestant>0){
+		it = realKeys.iterator();
+		
+		while(it.hasNext()) {
+			nom = (String) it.next();
+			nbVoixListe = listesEffectives.get(nom)[0];
+			nbSiegesListe = listesEffectives.get(nom)[1];
+			moyenne = nbVoixListe/(nbSiegesListe+1);
+			
+			if(moyenne>moyenneMax) {
+				moyenneMax = moyenne;
+				listeCandidat = nom;
+			}
+		}
+		
+		//Attribution d'un siège restant
+		listesEffectives.get(listeCandidat)[1] += 1;
+		nbSiegesRestant--;
+		
+		moyenneMax = 0d;
+		listeCandidat = null;
 	}
 	
 		//Affichage du résultat
