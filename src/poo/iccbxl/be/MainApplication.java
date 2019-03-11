@@ -49,12 +49,10 @@ public class MainApplication {
 	
 	Iterator it = keys.iterator();
 	String nom;
-	int nbVoix = 0;
 	
 	while(it.hasNext()) {
 		nom = (String) it.next();
-		nbVoix = listes.get(nom)[0];
-		suffrageTotal += nbVoix;
+		suffrageTotal += listes.get(nom)[0];
 	}
 	
 	it = keys.iterator();
@@ -68,6 +66,7 @@ public class MainApplication {
 		//Affichage du résultat
 	int nbSieges = 0;
 	
+	it = keys.iterator();
 	
 	while(it.hasNext()) {
 		nom = (String) it.next();
