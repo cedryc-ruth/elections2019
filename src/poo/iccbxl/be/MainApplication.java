@@ -11,13 +11,13 @@ public class MainApplication {
 		//Lecture des données
 	
 		//Définition d'un objet Mock
-	int[] dataListeA = { 32000, 2, 0 };
-	int[] dataListeB = { 25000, 2, 0 };
-	int[] dataListeC = { 16000, 1, 0 };
-	int[] dataListeD = { 12500, 1, 0 };
+	int[] dataListeA = { 32000, 0, 0 };
+	int[] dataListeB = { 25000, 0, 0 };
+	int[] dataListeC = { 16000, 0, 0 };
+	int[] dataListeD = { 12500, 0, 0 };
 	int[] dataListeE = { 8000, 0, 0 };
-	int[] dataListeF = { 4500, 0, 1 };
-	int[] dataListeG = { 2500, 0, 1 };
+	int[] dataListeF = { 4500, 0, 0 };
+	int[] dataListeG = { 2500, 0, 0 };
 	
 	TreeMap<String,int[]> listes = new TreeMap<String, int[]>();
 	
