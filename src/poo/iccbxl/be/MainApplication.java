@@ -29,6 +29,7 @@ public class MainApplication {
 	listes.put("F", dataListeF);
 	listes.put("G", dataListeG);
 	
+	int nbSiegesAPourvoir = 6;
 
 		//Traitement des données (Méthode de calcul)
 		
@@ -55,14 +56,21 @@ public class MainApplication {
 		suffrageTotal += listes.get(nom)[0];
 	}
 	
+	int suffrageEffectif = suffrageTotal;
+	
 	it = keys.iterator();
 	
 	while(it.hasNext()) {
 		nom = (String) it.next();
 		if(listes.get(nom)[0]/(double)suffrageTotal<0.05) {
-			listes.get(nom)[2] = 1;		//Liste éliminée
+			listes.get(nom)[2] = 1;					//Liste éliminée
+			suffrageEffectif -= listes.get(nom)[0];	//Retrait des voix
 		}
 	}
+	
+	//Calcul du quotient électoral
+	double quotientElectoral = suffrageEffectif/(double)nbSiegesAPourvoir;
+	
 		//Affichage du résultat
 	int nbSieges = 0;
 	
