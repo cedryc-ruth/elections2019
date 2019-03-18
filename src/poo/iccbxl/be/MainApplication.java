@@ -2,9 +2,11 @@ package poo.iccbxl.be;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -15,8 +17,95 @@ public class MainApplication {
 	public static void main(String[] args) {
 	//== Lecture des données ====================
 		
+		//Lecture du nombre de sièges à pourvoir
+		Scanner s = new Scanner(System.in);
+		
+		int nbSiegesAPourvoir = 0;
+		
+		while(nbSiegesAPourvoir == 0) {
+			try {
+				System.out.print("Nombre de sièges à pourvoir: (Tapez -1 pour quitter)");
+				nbSiegesAPourvoir = s.nextInt(); s.nextLine();
+				
+				if(nbSiegesAPourvoir==-1) {
+					System.out.println("Au revoir!");
+					System.exit(0);
+				}
+				
+				if(nbSiegesAPourvoir<0) {
+					nbSiegesAPourvoir = 0;
+					throw new InputMismatchException();
+				}
+			} catch (InputMismatchException e) {
+				s.nextLine();	//Vider le tampon 
+				//e.printStackTrace();
+			}
+		}
+		
+		System.out.println(nbSiegesAPourvoir);
+		
+		//Lecture du nombre de liste à définir
+		int nbListes = 0;
+		
+		while(nbListes == 0) {
+			try {
+				System.out.print("Nombre de listes à définir: (Tapez -1 pour quitter)");
+				nbListes = s.nextInt(); s.nextLine();
+				
+				if(nbListes==-1) {
+					System.out.println("Au revoir!");
+					System.exit(0);
+				}
+				
+				if(nbListes<0) {
+					nbListes = 0;
+					throw new InputMismatchException();
+				}
+			} catch (InputMismatchException e) {
+				s.nextLine();	//Vider le tampon 
+				//e.printStackTrace();
+			}
+		}
+		
+		System.out.println(nbListes);
+		
+		//Lecture des listes (nom + voix obtenues)
+		TreeMap<String,int[]> listes = new TreeMap<String, int[]>();
+		
+		String nomListe = null;
+		int nbVoix = -1;
+		int[] dataListe = {0,0,0}; 
+		
+		for(int i=0; i<nbListes ;i++) {
+			while (nomListe == null) {
+				try {
+					System.out.print("Nom de la liste: ");
+					nomListe = s.nextLine();
+				} catch (InputMismatchException e) {
+	
+				} 
+			}
+			
+			while(nbVoix < 0) {
+				try {
+					System.out.print("nombre de voix: ");
+					nbVoix = s.nextInt(); s.nextLine();
+				} catch (InputMismatchException e) {
+					s.nextLine();
+				}
+			}
+			
+			dataListe[0] = nbVoix;
+			
+			listes.put(nomListe, dataListe);
+			
+			dataListe = new int[3];
+			nomListe = null;
+			nbVoix = -1;
+		}
+		
 		//Définition d'un objet Mock
-		int[] dataListeA = { 32000, 0, 0 };
+	/*	int[] dataListeA = { 32000, 0, 0 };
 		int[] dataListeB = { 25000, 0, 0 };
 		int[] dataListeC = { 16000, 0, 0 };
 		int[] dataListeD = { 12000, 0, 0 };
@@ -26,15 +115,16 @@ public class MainApplication {
 		
 		TreeMap<String,int[]> listes = new TreeMap<String, int[]>();
 		
-		listes.put("Z", dataListeA);
+		listes.put("A", dataListeA);
 		listes.put("B", dataListeB);
-		listes.put("J", dataListeC);
+		listes.put("C", dataListeC);
 		listes.put("D", dataListeD);
 		listes.put("E", dataListeE);
 		listes.put("F", dataListeF);
 		listes.put("G", dataListeG);
-		
+			
 		int nbSiegesAPourvoir = 6;
+		*/
 	
 	//== Traitement des données ====================
 			
